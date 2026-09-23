@@ -1,0 +1,225 @@
+/* Container */
+.admin-vehicle {
+  min-height: 100vh;
+  margin-left: 200px;
+  padding: 70px 60px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* Title */
+.admin-vehicle h2 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+/* Table Wrapper (scroll safe) */
+.admin-vehicle table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+}
+
+/* Header */
+.admin-vehicle thead {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.admin-vehicle th {
+  padding: 22px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Rows */
+.admin-vehicle td {
+  padding: 20px;
+  text-align: center;
+  font-size: 17px;
+  color: #111827;
+  border-bottom: 1px solid #eee;
+}
+
+/* Row hover */
+.admin-vehicle tbody tr:hover {
+  background: #f1f5f9;
+  transform: scale(1.01);
+  transition: 0.2s;
+}
+
+/* Buttons */
+.admin-vehicle button {
+  padding: 12px 18px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Edit Button */
+.admin-vehicle button:first-child {
+  background: #2563eb;
+  color: white;
+}
+
+.admin-vehicle button:first-child:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.admin-vehicle button:last-child {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-vehicle button:last-child:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* No Data */
+.admin-vehicle td[colspan] {
+  padding: 40px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Back Link */
+.vehicles-style {
+  display: block;
+  width: 250px;
+  margin: 40px auto 0;
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.vehicles-style:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(16,185,129,0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .admin-vehicle {
+    padding: 30px 15px;
+  }
+
+  .admin-vehicle table {
+    font-size: 14px;
+  }
+
+  .admin-vehicle th,
+  .admin-vehicle td {
+    padding: 12px;
+  }
+}
+
+
+/* regusers */
+/* Container */
+.usr-container {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 50px 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Title */
+.usr-container h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Table */
+.usr-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+.usr-table th {
+  background: #e2e8f0;
+  color: #334155;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Data */
+.usr-table td {
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Row hover */
+.usr-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+/* Edit Button (link) */
+.edit-btn {
+  padding: 6px 12px;
+  background: #60a5fa;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.edit-btn:hover {
+  background: #3b82f6;
+}
+
+/* Delete Button */
+.delete-btn {
+  padding: 6px 12px;
+  background: #f87171;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .usr-container {
+    padding: 20px;
+  }
+
+  .usr-table th,
+  .usr-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

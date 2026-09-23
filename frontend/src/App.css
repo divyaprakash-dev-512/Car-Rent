@@ -1,0 +1,153 @@
+/* ================= MAIN BANNER ================= */
+.clb-main-container {
+  height: 250px;
+  background: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70") center/cover no-repeat;
+  position: relative;
+}
+
+.clb-overlay {
+  background: rgba(0,0,0,0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.clb-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.clb-breadcrumb {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ================= MAIN LAYOUT ================= */
+.car-list-wrapper {
+  display: flex;
+  padding: 40px;
+  gap: 30px;
+  background: #f5f7fa;
+}
+
+/* ================= SIDEBAR ================= */
+.car-sidebar {
+  width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.car-sidebar h3 {
+  margin-bottom: 20px;
+}
+
+.car-sidebar select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.search-btn {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  background: #0056b3;
+}
+
+/* ================= LISTINGS ================= */
+.car-listings {
+  flex: 1;
+}
+
+.listing-count {
+  margin-bottom: 20px;
+}
+
+/* GRID (2 per row) */
+.car-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* ================= CARD ================= */
+.crs-car-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.crs-car-card:hover {
+  transform: translateY(-8px);
+}
+
+/* IMAGE */
+.crs-car-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* INFO */
+.crs-car-info {
+  padding: 15px;
+}
+
+.crs-car-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.crs-car-info p {
+  font-size: 16px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* BUTTON */
+.details-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.details-btn:hover {
+  background: #0056b3;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+  .car-list-wrapper {
+    flex-direction: column;
+  }
+
+  .car-sidebar {
+    width: 100%;
+  }
+
+  .car-info {
+    grid-template-columns: 1fr;
+  }
+}

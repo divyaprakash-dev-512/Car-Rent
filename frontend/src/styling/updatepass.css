@@ -1,0 +1,44 @@
+.up-up{
+    background-color: rgb(102, 148, 233);
+    height: 267px;
+    width: 230px;
+    margin-top: 140px;
+    border-radius: 10px;
+}
+
+.up-up input{
+    width: 90%;
+    height: 20px;
+    margin: 10px;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.up-up label{
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+    padding: 10px 10px;
+    
+  
+}
+
+
+.up-up button{
+    background-color: rgb(15, 14, 122);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 30px;
+   
+}
+
+
+
+.up-h1{
+    margin-left: 200px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
