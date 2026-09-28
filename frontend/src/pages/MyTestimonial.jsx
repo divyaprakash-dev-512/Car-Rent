@@ -4,12 +4,18 @@ export default function MyTestimonial() {
   const [myTestimonials, setMyTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Logged-in user
-  const user =
-    JSON.parse(localStorage.getItem("user")) ||
-    JSON.parse(localStorage.getItem("userInfo"));
+  // Safe localStorage extraction
+  const getUserFromStorage = () => {
+    try {
+      const stored = localStorage.getItem("user") || localStorage.getItem("userInfo");
+      return stored ? JSON.parse(stored) : null;
+    } catch (err) {
+      console.error("localStorage parse error:", err);
+      return null;
+    }
+  };
 
-  // User ki ID
+  const user = getUserFromStorage();
   const userId = user?._id || user?.id || user?.userId;
 
   useEffect(() => {
@@ -20,16 +26,20 @@ export default function MyTestimonial() {
       }
 
       try {
-        // ID route me bhej rahe hain
         const response = await fetch(
           `https://car-rent-hlcq.onrender.com/api/testimonials/${userId}`
         );
 
+        if (!response.ok) {
+          throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
+        console.log("Fetched Data from Backend:", data); // Debugging Log
 
         const testimonials = Array.isArray(data)
           ? data
-          : data.data || [];
+          : data.testimonials || data.data || [];
 
         setMyTestimonials(testimonials);
       } catch (error) {
@@ -79,7 +89,7 @@ export default function MyTestimonial() {
         {myTestimonials.length > 0 ? (
           myTestimonials.map((item) => (
             <div
-              key={item._id}
+              key={item._id || item.id}
               style={{
                 border: "1px solid #ddd",
                 borderRadius: "8px",
@@ -95,11 +105,11 @@ export default function MyTestimonial() {
                   marginBottom: "8px",
                 }}
               >
-                "{item.testimonial}"
+                "{item.testimonial || item.message || item.content}"
               </p>
 
               <h4 style={{ color: "#555" }}>
-                - {item.user_name || user?.name || "You"}
+                - {item.user_name || item.userName || user?.name || "You"}
               </h4>
             </div>
           ))

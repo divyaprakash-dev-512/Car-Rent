@@ -489,7 +489,7 @@ exports.deleteBrand = async (req, res) => {
 
 exports.addTestimonial = async (req, res) => {
   try {
-    const { testimonial, user_name } = req.body;
+    const { testimonial, user_name , userId } = req.body;
 
     if (!testimonial) {
       return res.status(400).json({ message: "Testimonial required" });
@@ -497,7 +497,8 @@ exports.addTestimonial = async (req, res) => {
 
     const newData = await Testimonial.create({
       testimonial,
-      user_name
+      user_name,
+      userId
     });
 
     res.json({

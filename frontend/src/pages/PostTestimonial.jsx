@@ -9,41 +9,40 @@ export default function PostTestimonial() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if (!testimonial.trim()) {
-      alert("Please write your testimonial");
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      setLoading(true);
-
-      const res = await axios.post(
-  "https://car-rent-hlcq.onrender.com/api/posttestimonials",
-  {
-    testimonial: testimonial,
-    user_name: user?.name || "Customer"
+  if (!testimonial.trim()) {
+    alert("Please write your testimonial");
+    return;
   }
-);
 
-      console.log(JSON.parse(localStorage.getItem("user")));
+  // Get user & ID safely
+  const user = JSON.parse(localStorage.getItem("user")) || JSON.parse(localStorage.getItem("userInfo"));
+  const userId = user?._id || user?.id || user?.userId;
 
-      alert(res.data.message || "Testimonial Added");
+  try {
+    setLoading(true);
 
-      setTestimonial("");
+    const res = await axios.post(
+      "https://car-rent-hlcq.onrender.com/api/posttestimonials",
+      {
+        testimonial: testimonial,
+        user_name: user?.name || "Customer",
+        userId: user?._id
+      }
+    );
 
-    } catch (error) {
-      console.log("Testimonial Error:", error);
-      alert(
-        error.response?.data?.message ||
-        "Failed to add testimonial"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    alert(res.data.message || "Testimonial Added");
+    setTestimonial("");
+  } catch (error) {
+    console.log("Testimonial Error:", error);
+    alert(error.response?.data?.message || "Failed to add testimonial");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="pt-wrapper">

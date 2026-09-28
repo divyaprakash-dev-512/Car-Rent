@@ -7,7 +7,12 @@ const testimonialSchema = new mongoose.Schema({
   user_name: {
     type: String,
     default: "Anonymous"
-  }
+  },
+  userId: {
+    type: mongoose.Scehma.objectId,
+    ref:"User",
+    required:true
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Testimonial", testimonialSchema);
