@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styling/home.css";
+import {Link} from 'react-router-dom'
 
 export default function Home() {
 
@@ -144,6 +145,11 @@ export default function Home() {
 </div>
       </section>
 
+<div>
+  <Link to={'/admin'}>A</Link>
+</div>
     </div>
+
+  
   );
 }
