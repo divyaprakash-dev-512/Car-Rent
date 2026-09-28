@@ -30,7 +30,7 @@ const handleSubmit = async (e) => {
       {
         testimonial: testimonial,
         user_name: user?.name || "Customer",
-        userId: user?._id
+        userId: userId
       }
     );
 
