@@ -21,10 +21,14 @@ const {deleteUser} = require('../controller/authController');
 const {deleteBrand} = require('../controller/authController');
 const {regUserEdit} = require('../controller/authController');
 const {RegupDate} =require('../controller/authController');
-const {getDashboard} = require('../controller/authController')
+const {getDashboard} = require('../controller/authController');
+const {addTestimonial} = require('../controller/authController');
+const {getTestimonials} = require('../controller/authController');
 const router = express.Router();
 
 router.post('/signup',Register);
+router.post('/posttestimonials',addTestimonial);
+router.get('/testimonials',getTestimonials);
 router.post('/login',login);
 router.put('/profile/:id',Profile);
 router.get('/profile/:id', getProfile);

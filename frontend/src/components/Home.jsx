@@ -14,6 +14,25 @@ export default function Home() {
       .catch(err => console.log(err));
   }, []);
 
+
+  const [stats, setStats] = useState({
+  users: 0,
+  bookings: 0
+});
+
+useEffect(() => {
+  fetch("https://car-rent-hlcq.onrender.com/api/dashboard")
+    .then(res => res.json())
+    .then(data => {
+      setStats({
+        users: data.users,
+        bookings: data.bookings
+      });
+    })
+    .catch(err => console.log(err));
+}, []);
+
+
   
   return (
     <div className="crp-main-container">
@@ -80,18 +99,13 @@ export default function Home() {
 
       <div className="stats">
         <div className="card">
-          <h1>10K+</h1>
+          <h1> {stats.users}</h1>
           <p>Customers</p>
         </div>
 
         <div className="card">
-          <h1>500+</h1>
+          <h1>{stats.bookings}</h1>
           <p>Bookings</p>
-        </div>
-
-        <div className="card">
-          <h1>4.9⭐</h1>
-          <p>Rating</p>
         </div>
 
         <div className="card">

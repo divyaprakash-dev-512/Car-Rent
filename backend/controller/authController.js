@@ -486,43 +486,43 @@ exports.deleteBrand = async (req, res) => {
   }
 };
 
-//testimonialpraddkrne k liye
-// exports.addTestimonial = async (req, res) => {
-//   try {
-//     const { testimonial, user_name } = req.body;
 
-//     if (!testimonial) {
-//       return res.status(400).json({ message: "Testimonial required" });
-//     }
+exports.addTestimonial = async (req, res) => {
+  try {
+    const { testimonial, user_name } = req.body;
 
-//     const newData = await Testimonial.create({
-//       testimonial,
-//       user_name
-//     });
+    if (!testimonial) {
+      return res.status(400).json({ message: "Testimonial required" });
+    }
 
-//     res.json({
-//       message: "Testimonial Added",
-//       data: newData
-//     });
+    const newData = await Testimonial.create({
+      testimonial,
+      user_name
+    });
 
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+    res.json({
+      message: "Testimonial Added",
+      data: newData
+    });
 
-// exports.getTestimonials = async (req, res) => {
-//   try {
-//     const data = await Testimonial.find().sort({ createdAt: -1 });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
-//     res.json({
-//       message: "All Testimonials",
-//       data
-//     });
+exports.getTestimonials = async (req, res) => {
+  try {
+    const data = await Testimonial.find().sort({ createdAt: -1 });
 
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+    res.json({
+      message: "All Testimonials",
+      data
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 
 
