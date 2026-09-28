@@ -8,34 +8,27 @@ export default function MyTestimonial() {
   useEffect(() => {
     const fetchMyTestimonials = async () => {
       try {
-        const stored =
-          localStorage.getItem("user") ||
-          localStorage.getItem("userInfo");
-
-        if (!stored) {
-          console.log("USER NOT FOUND");
-          setLoading(false);
-          return;
-        }
-
-        const loggedUser = JSON.parse(stored);
-
-        console.log("USER:", loggedUser);
-
-        const userId =
-          loggedUser?._id ||
-          loggedUser?.id ||
-          loggedUser?.userId;
+        // Login ke time ye values localStorage me save ho rahi hain
+        const userId = localStorage.getItem("userId");
+        const userName = localStorage.getItem("name");
 
         console.log("USER ID:", userId);
+        console.log("USER NAME:", userName);
 
+        // Agar login nahi hai
         if (!userId) {
+          console.log("USER ID NOT FOUND");
           setLoading(false);
           return;
         }
 
-        setUser(loggedUser);
+        // User information state me set karo
+        setUser({
+          _id: userId,
+          name: userName || "Customer",
+        });
 
+        // User ke testimonials fetch karo
         const response = await fetch(
           `https://car-rent-hlcq.onrender.com/api/testimonials/${userId}`
         );
@@ -50,6 +43,7 @@ export default function MyTestimonial() {
 
         console.log("API DATA:", data);
 
+        // API agar direct array bhejti hai
         const testimonials = Array.isArray(data)
           ? data
           : data.testimonials || data.data || [];
@@ -67,17 +61,29 @@ export default function MyTestimonial() {
     fetchMyTestimonials();
   }, []);
 
+  // Loading
   if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: "30px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          padding: "30px",
+        }}
+      >
         <h3>Loading your testimonials...</h3>
       </div>
     );
   }
 
+  // Login nahi hai
   if (!user) {
     return (
-      <div style={{ textAlign: "center", padding: "30px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          padding: "30px",
+        }}
+      >
         <h3>Please login first to view your testimonials.</h3>
       </div>
     );
