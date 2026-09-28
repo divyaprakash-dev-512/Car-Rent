@@ -3,67 +3,82 @@ import React, { useEffect, useState } from "react";
 export default function MyTestimonial() {
   const [myTestimonials, setMyTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Safe localStorage extraction
-  const getUserFromStorage = () => {
-    try {
-      const stored = localStorage.getItem("user") || localStorage.getItem("userInfo");
-      return stored ? JSON.parse(stored) : null;
-    } catch (err) {
-      console.error("localStorage parse error:", err);
-      return null;
-    }
-  };
-
-  const user = getUserFromStorage();
-  const userId = user?._id || user?.id || user?.userId;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchMyTestimonials = async () => {
-      if (!userId) {
-        setLoading(false);
-        return;
-      }
-
       try {
+        const stored =
+          localStorage.getItem("user") ||
+          localStorage.getItem("userInfo");
+
+        if (!stored) {
+          console.log("USER NOT FOUND");
+          setLoading(false);
+          return;
+        }
+
+        const loggedUser = JSON.parse(stored);
+
+        console.log("USER:", loggedUser);
+
+        const userId =
+          loggedUser?._id ||
+          loggedUser?.id ||
+          loggedUser?.userId;
+
+        console.log("USER ID:", userId);
+
+        if (!userId) {
+          setLoading(false);
+          return;
+        }
+
+        setUser(loggedUser);
+
         const response = await fetch(
           `https://car-rent-hlcq.onrender.com/api/testimonials/${userId}`
         );
 
+        console.log("STATUS:", response.status);
+
         if (!response.ok) {
-          throw new Error(`HTTP Error! Status: ${response.status}`);
+          throw new Error(`HTTP Error: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("Fetched Data from Backend:", data); // Debugging Log
+
+        console.log("API DATA:", data);
 
         const testimonials = Array.isArray(data)
           ? data
           : data.testimonials || data.data || [];
 
+        console.log("FINAL TESTIMONIALS:", testimonials);
+
         setMyTestimonials(testimonials);
       } catch (error) {
-        console.error("Error fetching testimonials:", error);
+        console.error("FETCH ERROR:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchMyTestimonials();
-  }, [userId]);
-
-  if (!userId) {
-    return (
-      <div style={{ textAlign: "center", padding: "30px" }}>
-        <h3>Please login first to view your testimonials.</h3>
-      </div>
-    );
-  }
+  }, []);
 
   if (loading) {
     return (
       <div style={{ textAlign: "center", padding: "30px" }}>
         <h3>Loading your testimonials...</h3>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div style={{ textAlign: "center", padding: "30px" }}>
+        <h3>Please login first to view your testimonials.</h3>
       </div>
     );
   }
@@ -114,7 +129,7 @@ export default function MyTestimonial() {
             </div>
           ))
         ) : (
-          <p>No testimonials found for your User ID: {userId}</p>
+          <p>No testimonials found.</p>
         )}
       </div>
     </div>
