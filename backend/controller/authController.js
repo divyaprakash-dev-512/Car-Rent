@@ -511,6 +511,32 @@ exports.addTestimonial = async (req, res) => {
   }
 };
 
+
+exports.deleteTestimonial = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log("my id is", id);
+
+    const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
+
+    if (!deletedTestimonial) {
+      return res.status(404).json({
+        message: "Testimonial not found",
+      });
+    }
+
+    res.json({
+      message: "Testimonial deleted successfully",
+      data: deletedTestimonial,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
 exports.getTestimonials = async (req, res) => {
   try {
     const data = await Testimonial.find().sort({ createdAt: -1 });

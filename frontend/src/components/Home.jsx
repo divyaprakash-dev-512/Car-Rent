@@ -134,8 +134,8 @@ export default function Home() {
         
        
         <h4>
-          - {item.name || item.userName || item.username || item.fullName || item.author || "Customer"}
-        </h4>
+  - {item.user_name || item.name || item.userName || item.username || item.fullName || item.author || "Customer"}
+</h4>
       </div>
     ))
   ) : (
