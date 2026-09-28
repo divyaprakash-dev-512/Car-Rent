@@ -11,7 +11,7 @@ export default function Admindash() {
 
   useEffect(() => {
 
-    fetch("http://localhost:1175/api/dashboard")
+    fetch("https://car-rent-hlcq.onrender.com/api/dashboard")
       .then((res) => res.json())
       .then((result) => {
         console.log("Dashboard Data:", result);

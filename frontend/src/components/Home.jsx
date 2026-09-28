@@ -6,7 +6,7 @@ export default function Home() {
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:1175/api/vehicles")
+    fetch("https://car-rent-hlcq.onrender.com/api/vehicles")
       .then(res => res.json())
       .then(data => {
         setVehicles(data.data || []);
@@ -52,7 +52,7 @@ export default function Home() {
                 <img
                   src={
                     car.images && car.images.length > 0
-                      ? `http://localhost:1175/uploads/${car.images[0]}`
+                      ? `https://car-rent-hlcq.onrender.com/uploads/${car.images[0]}`
                       : "https://via.placeholder.com/300"
                   }
                   alt={car.title}

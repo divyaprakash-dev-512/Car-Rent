@@ -23,7 +23,7 @@ export default function ProfileSetting() {
           
             return;
           }
-          const res = await fetch(`http://localhost:1175/api/profile/${userId}`);
+          const res = await fetch(`https://car-rent-hlcq.onrender.com/api/profile/${userId}`);
   
           const data = await res.json();
   
@@ -65,7 +65,7 @@ export default function ProfileSetting() {
       try {
         const userId = localStorage.getItem("userId");
   
-        const res = await fetch(`http://localhost:1175/api/profile/${userId}`, {
+        const res = await fetch(`https://car-rent-hlcq.onrender.com/api/profile/${userId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"

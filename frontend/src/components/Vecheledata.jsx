@@ -6,7 +6,7 @@ export default function Vecheledata() {
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:1175/api/vehicles")
+    fetch("https://car-rent-hlcq.onrender.com/api/vehicles")
       .then(res => res.json())
       .then(data => {
         setVehicles(data.data || []);
@@ -19,7 +19,7 @@ export default function Vecheledata() {
     if (!window.confirm("Are you sure to delete?")) return;
 
     try {
-      const res = await fetch(`http://localhost:1175/api/vehicle/${id}`, {
+      const res = await fetch(`https://car-rent-hlcq.onrender.com/api/vehicle/${id}`, {
         method: "DELETE"
       });
 

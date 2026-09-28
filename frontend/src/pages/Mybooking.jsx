@@ -7,7 +7,7 @@ export default function MyBookings() {
   useEffect(() => {
   const userId = localStorage.getItem("userId");
 
-  fetch(`http://localhost:1175/api/my-bookings/${userId}`)
+  fetch(`https://car-rent-hlcq.onrender.com/api/my-bookings/${userId}`)
     .then((res) => res.json())
     .then((data) => {
       console.log("BOOKING API RESPONSE:", data);

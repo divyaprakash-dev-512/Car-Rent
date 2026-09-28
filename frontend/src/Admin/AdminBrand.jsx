@@ -9,7 +9,7 @@ const AdminBrand = () => {
 
   // GET BRANDS
   useEffect(() => {
-    fetch("http://localhost:1175/api/brand")
+    fetch("https://car-rent-hlcq.onrender.com/api/brand")
       .then((res) => res.json())
       .then((data) => {
         setBrands(data.data || []);
@@ -27,7 +27,7 @@ const AdminBrand = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:1175/api/createbrand", {
+      const res = await fetch("https://car-rent-hlcq.onrender.com/api/createbrand", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -55,7 +55,7 @@ const AdminBrand = () => {
   // DELETE BRAND
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:1175/api/deleteBrands/${id}`);
+      await axios.delete(`https://car-rent-hlcq.onrender.com/api/deleteBrands/${id}`);
       setBrands(brands.filter((b) => b._id !== id)); 
     } catch (err) {
       console.log("Delete error", err);

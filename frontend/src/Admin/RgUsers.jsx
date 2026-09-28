@@ -8,7 +8,7 @@ export default function RgUsers() {
 
   // GET USERS
   useEffect(() => {
-    fetch("http://localhost:1175/api/reguser")
+    fetch("https://car-rent-hlcq.onrender.com/api/reguser")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.data);
@@ -18,7 +18,7 @@ export default function RgUsers() {
   // DELETE USER
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:1175/api/deleteUser/${id}`);
+      await axios.delete(`https://car-rent-hlcq.onrender.com/api/deleteUser/${id}`);
       
       // UI update after delete
       setUsers(users.filter((u) => u._id !== id));

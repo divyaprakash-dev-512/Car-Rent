@@ -27,7 +27,7 @@ export default function Contact() {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:1175/api/contact", {
+      const res = await fetch("https://car-rent-hlcq.onrender.com/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

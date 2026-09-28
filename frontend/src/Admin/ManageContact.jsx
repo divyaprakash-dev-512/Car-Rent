@@ -6,7 +6,7 @@ export default function ManageContact() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:1175/api/contact")
+    fetch("https://car-rent-hlcq.onrender.com/api/contact")
       .then(res => res.json())
       .then(data => setContacts(data));
   }, []);
@@ -16,7 +16,7 @@ export default function ManageContact() {
     if (!window.confirm("Delete this contact?")) return;
 
     try {
-      const res = await fetch(`http://localhost:1175/api/contact/${id}`, {
+      const res = await fetch(`https://car-rent-hlcq.onrender.com/api/contact/${id}`, {
         method: "DELETE"
       });
 

@@ -25,7 +25,7 @@ export default function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:1175/api/adminlogin", {
+      const res = await fetch("https://car-rent-hlcq.onrender.com/api/adminlogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

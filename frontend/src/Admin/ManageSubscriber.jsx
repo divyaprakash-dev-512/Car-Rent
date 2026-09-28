@@ -11,13 +11,13 @@ export default function ManageSubscriber() {
   }, []);
 
   const fetchSubscribers = async () => {
-    const res = await axios.get("http://localhost:1175/api/subscribers");
+    const res = await axios.get("https://car-rent-hlcq.onrender.com/api/subscribers");
     setData(res.data);
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:1175/api/subscriberdelete/${id}`);
+      await axios.delete(`https://car-rent-hlcq.onrender.com/api/subscriberdelete/${id}`);
       setData(data.filter(item => item._id !== id));
     } catch (err) {
       console.log("Delete error", err);

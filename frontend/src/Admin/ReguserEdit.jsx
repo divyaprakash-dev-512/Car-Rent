@@ -18,7 +18,7 @@ export default function ReguserEdit() {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:1175/api/reguser/${id}`)
+    axios.get(`https://car-rent-hlcq.onrender.com/api/reguser/${id}`)
       .then(res => {
         setForm(res.data.data);
       })
@@ -38,7 +38,7 @@ export default function ReguserEdit() {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:1175/api/update-Profile/${id}`, form);
+      await axios.put(`https://car-rent-hlcq.onrender.com/api/update-Profile/${id}`, form);
       alert("User Updated Successfully");
     } catch (err) {
       console.log("Update error", err);

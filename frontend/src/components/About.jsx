@@ -9,7 +9,7 @@ export default function About() {
 
   const handleSubscribe = async () => {
     try {
-      const res = await axios.post("http://localhost:1175/api/subscribe", { email });
+      const res = await axios.post("https://car-rent-hlcq.onrender.com/api/subscribe", { email });
       console.log(res.data);
       setEmail("");
     } catch (err) {

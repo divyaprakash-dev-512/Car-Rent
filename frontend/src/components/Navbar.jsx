@@ -39,7 +39,7 @@ export default function Navbar() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:1175/api/login", {
+      const res = await fetch("https://car-rent-hlcq.onrender.com/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -93,7 +93,7 @@ export default function Navbar() {
     }
 
     try {
-      const res = await fetch("http://localhost:1175/api/signup", {
+      const res = await fetch("https://car-rent-hlcq.onrender.com/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
