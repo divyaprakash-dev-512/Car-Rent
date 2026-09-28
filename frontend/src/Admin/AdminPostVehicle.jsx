@@ -25,8 +25,12 @@ export default function AdminPostVehicle() {
   };
 
   const handleFileChange = (e) => {
-    setImages([...e.target.files]); 
-  };
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  setImages((prev) => [...prev, file]);
+};
 
   useEffect(() => {
     fetch("https://car-rent-hlcq.onrender.com/api/brand")
@@ -112,9 +116,23 @@ export default function AdminPostVehicle() {
         <input name="seats" type="number" placeholder="Seats" value={form.seats} onChange={handleChange} />
 
         
-        <input type="file" multiple onChange={handleFileChange} />
-         <input type="file" multiple onChange={handleFileChange} />
-          <input type="file" multiple onChange={handleFileChange} />
+       <input
+  type="file"
+  accept="image/jpeg,image/jpg,image/png,image/webp"
+  onChange={handleFileChange}
+/>
+
+<input
+  type="file"
+  accept="image/jpeg,image/jpg,image/png,image/webp"
+  onChange={handleFileChange}
+/>
+
+<input
+  type="file"
+  accept="image/jpeg,image/jpg,image/png,image/webp"
+  onChange={handleFileChange}
+/>
 
         <button onClick={handleSubmit}>Save</button>
 
