@@ -1,79 +1,110 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "../styling/profile.css";
 
 export default function PostTestimonial() {
-
   const [testimonial, setTestimonial] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    const userId = localStorage.getItem("userId");
+    const userName = localStorage.getItem("name") || "Customer";
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    console.log("USER ID:", userId);
+    console.log("USER NAME:", userName);
 
-  if (!testimonial.trim()) {
-    alert("Please write your testimonial");
-    return;
-  }
+    // Login check
+    if (!userId) {
+      alert("Please login first");
+      return;
+    }
 
-  // Get user & ID safely
-  const user = JSON.parse(localStorage.getItem("user")) || JSON.parse(localStorage.getItem("userInfo"));
-  const userId = user?._id || user?.id || user?.userId;
+    // Empty testimonial check
+    if (!testimonial.trim()) {
+      alert("Please enter testimonial");
+      return;
+    }
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const res = await axios.post(
-      "https://car-rent-hlcq.onrender.com/api/posttestimonials",
-      {
-        testimonial: testimonial,
-        user_name: user?.name || "Customer",
-        userId: userId
+      const response = await fetch(
+        "https://car-rent-hlcq.onrender.com/api/posttestimonials",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            testimonial: testimonial,
+            user_name: userName,
+            userId: userId,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("STATUS:", response.status);
+      console.log("RESPONSE:", data);
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || data.error || "Failed to post testimonial"
+        );
       }
-    );
 
-    alert(res.data.message || "Testimonial Added");
-    setTestimonial("");
-  } catch (error) {
-    console.log("Testimonial Error:", error);
-    alert(error.response?.data?.message || "Failed to add testimonial");
-  } finally {
-    setLoading(false);
-  }
-};
+      alert("Testimonial posted successfully!");
+
+      setTestimonial("");
+    } catch (error) {
+      console.error("Testimonial Error:", error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="pt-wrapper">
-      <div className="pt-card">
+    <div
+      style={{
+        maxWidth: "600px",
+        margin: "40px auto",
+        padding: "20px",
+      }}
+    >
+      <h2>Post Testimonial</h2>
 
-        <h1 className="pt-title">Post a Testimonial</h1>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={testimonial}
+          onChange={(e) => setTestimonial(e.target.value)}
+          placeholder="Write your testimonial..."
+          rows="5"
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginTop: "15px",
+            marginBottom: "15px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            resize: "vertical",
+          }}
+        />
 
-        <form onSubmit={handleSubmit}>
-
-          <label className="pt-label">
-            Testimonial
-          </label>
-
-          <textarea
-            className="pt-textarea"
-            placeholder="Write your testimonial here..."
-            value={testimonial}
-            onChange={(e) => setTestimonial(e.target.value)}
-          />
-
-          <button
-            className="pt-btn"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Saving..." : "Save"}
-          </button>
-
-        </form>
-
-      </div>
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: loading ? "not-allowed" : "pointer",
+          }}
+        >
+          {loading ? "Posting..." : "Post Testimonial"}
+        </button>
+      </form>
     </div>
   );
 }
