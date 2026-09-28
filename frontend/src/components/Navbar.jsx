@@ -167,7 +167,7 @@ export default function Navbar() {
               <div className="dropdown">
       
                 <li><Link to="/profile">Profile</Link></li>
-                <li> <Link to="/booking">My Booking</Link></li>
+                <li> <Link to="/mybooking">My Booking</Link></li>
                 <li onClick={handleLogout}><Link>Logout</Link></li>
               </div>
             )}

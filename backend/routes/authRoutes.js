@@ -23,12 +23,14 @@ const {regUserEdit} = require('../controller/authController');
 const {RegupDate} =require('../controller/authController');
 const {getDashboard} = require('../controller/authController');
 const {addTestimonial} = require('../controller/authController');
-const {getTestimonials} = require('../controller/authController');
+const {getTestimonials}  = require('../controller/authController');
+const {getMyTestimonials} =  require('../controller/authController');
 const router = express.Router();
 
 router.post('/signup',Register);
 router.post('/posttestimonials',addTestimonial);
 router.get('/testimonials',getTestimonials);
+router.get("/testimonials/:id", getMyTestimonials);
 router.post('/login',login);
 router.put('/profile/:id',Profile);
 router.get('/profile/:id', getProfile);

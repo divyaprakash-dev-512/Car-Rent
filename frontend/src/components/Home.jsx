@@ -16,24 +16,35 @@ export default function Home() {
 
 
   const [stats, setStats] = useState({
-  users: 0,
-  bookings: 0
-});
+    users: 0,
+    bookings: 0
+  });
 
-useEffect(() => {
-  fetch("https://car-rent-hlcq.onrender.com/api/dashboard")
-    .then(res => res.json())
-    .then(data => {
-      setStats({
-        users: data.users,
-        bookings: data.bookings
-      });
-    })
-    .catch(err => console.log(err));
-}, []);
+  useEffect(() => {
+    fetch("https://car-rent-hlcq.onrender.com/api/dashboard")
+      .then(res => res.json())
+      .then(data => {
+        setStats({
+          users: data.users,
+          bookings: data.bookings
+        });
+      })
+      .catch(err => console.log(err));
+  }, []);
 
+  // --- DYNAMIC TESTIMONIALS STATE & FETCH ---
+  const [testimonials, setTestimonials] = useState([]);
 
-  
+  useEffect(() => {
+    fetch("https://car-rent-hlcq.onrender.com/api/testimonials")
+      .then(res => res.json())
+      .then(data => {
+        // Agar backend response array hai toh data, varna data.data
+        setTestimonials(Array.isArray(data) ? data : data.data || []);
+      })
+      .catch(err => console.log("Testimonials fetch error:", err));
+  }, []);
+
   return (
     <div className="crp-main-container">
 
@@ -94,46 +105,44 @@ useEffect(() => {
       </div>
 
       <section className="customers-section">
-      <h2>Our Happy Customers</h2>
-      <p className="subtitle">We have served thousands of satisfied clients</p>
+        <h2>Our Happy Customers</h2>
+        <p className="subtitle">We have served thousands of satisfied clients</p>
 
-      <div className="stats">
-        <div className="card">
-          <h1> {stats.users}</h1>
-          <p>Customers</p>
+        <div className="stats">
+          <div className="card">
+            <h1> {stats.users}</h1>
+            <p>Customers</p>
+          </div>
+
+          <div className="card">
+            <h1>{stats.bookings}</h1>
+            <p>Bookings</p>
+          </div>
+
+          <div className="card">
+            <h1>24/7</h1>
+            <p>Support</p>
+          </div>
         </div>
 
-        <div className="card">
-          <h1>{stats.bookings}</h1>
-          <p>Bookings</p>
-        </div>
-
-        <div className="card">
-          <h1>24/7</h1>
-          <p>Support</p>
-        </div>
+    
+       <div className="testimonials">
+  {testimonials.length > 0 ? (
+    testimonials.map((item, index) => (
+      <div className="testimonial-card" key={item._id || index}>
+        <p>"{item.message || item.testimonial || item.content || item.comment}"</p>
+        
+       
+        <h4>
+          - {item.name || item.userName || item.username || item.fullName || item.author || "Customer"}
+        </h4>
       </div>
-
-      <div className="testimonials">
-        <div className="testimonial-card">
-          <p>"Amazing service! Car was clean and smooth."</p>
-          <h4>- Rahul Sharma</h4>
-        </div>
-
-        <div className="testimonial-card">
-          <p>"Best rental experience ever. Highly recommended!"</p>
-          <h4>- Priya Verma</h4>
-        </div>
-
-        <div className="testimonial-card">
-          <p>"Affordable and reliable service. Loved it!"</p>
-          <h4>- Aman Gupta</h4>
-        </div>
-      </div>
-    </section>
-
-
-
+    ))
+  ) : (
+    <p>No Testimonials Yet</p>
+  )}
+</div>
+      </section>
 
     </div>
   );

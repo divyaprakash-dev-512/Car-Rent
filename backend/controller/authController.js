@@ -524,7 +524,19 @@ exports.getTestimonials = async (req, res) => {
   }
 };
 
+exports.getMyTestimonials = async (req, res) => {
+  try {
+    const testimonials = await Testimonial.find({
+      userId: req.params.id
+    });
 
+    res.json(testimonials);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching testimonials"
+    });
+  }
+};
 
 exports.regUserEdit = async (req, res) => {
   const user = await User.findById(req.params.id);
