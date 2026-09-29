@@ -1,9 +1,18 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+
+// uploads folder ka proper absolute path
+const uploadDir = path.join(__dirname, "../uploads");
+
+// Agar uploads folder nahi hai to automatically create hoga
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, uploadDir);
   },
 
   filename: function (req, file, cb) {
@@ -12,7 +21,6 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-
   const allowedExtensions = [
     ".jpg",
     ".jpeg",
